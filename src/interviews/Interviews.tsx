@@ -168,6 +168,12 @@ const Interviews = (props: RouteComponentProps) => {
         }
     }
 
+    const [formdata, setFormdata] = useState({});
+
+    useEffect(()=>{
+
+    }, [formdata])
+
     return(
         <>
             <div>
@@ -203,7 +209,8 @@ const Interviews = (props: RouteComponentProps) => {
                     .map((i: Interview) => (
                         <tr key={i.id}>
                             <td>{i.id}</td>
-                            <td>{i.appointment.toString().substring(0, 10)}{' '}{i.appointment.toString().substring(11, 16)}</td>
+                            <td>
+                                {i.appointment.toString().substring(0, 10)}{' '}{i.appointment.toString().substring(11, 16)}</td>
                             <td>{i.candidate}</td>
                             <td>{i.phone}</td>
                             <td>{i.scheduler}</td>
@@ -233,7 +240,7 @@ const Interviews = (props: RouteComponentProps) => {
                                                     // @ts-ignore
                                                     let fileData = (event.target as HTMLInputElement).files[0];
                                                     formData.append('file', fileData);
-                                                    dispatch2(uploadResume(i.id, formData));
+                                                    setFormdata(formData);
                                                 }}
                                                 type="file" name="file">
                                             </input>
@@ -241,8 +248,8 @@ const Interviews = (props: RouteComponentProps) => {
                                     }
                                 </div>
                                 <a href={`http://127.0.0.1:8090/Documents/Training/SchedulerSystem/resumeFolder/${i.resume}`}><button>○</button></a>
-                                <button>↑</button>
-                                <button>↓</button>
+                                <button onClick={()=>dispatch2(uploadResume(i.id, formdata))}>↑</button>
+                                <a href={`http://127.0.0.1:8090/Documents/Training/SchedulerSystem/resumeFolder/${i.resume}`}><button>↓</button></a>
                             </td>
                         </tr>
                     ))

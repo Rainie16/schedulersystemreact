@@ -5,6 +5,7 @@ import {connect, useDispatch, useSelector} from "react-redux";
 import {Button, DatePicker, Form, Input} from "antd";
 import {addInterview} from "../../actions/interview.action";
 import {Interview} from "../../shared/models/interview";
+import {RouteComponentProps} from "react-router-dom";
 
 type SizeType = Parameters<typeof Form>[0]['size'];
 
@@ -12,7 +13,7 @@ const validateMessages = {
     required: '${label} is required!',
 }
 
-const AddInterview = () => {
+const AddInterview = (props: RouteComponentProps) => {
 
     const userNameState = useSelector((state:any)=>state?.user)
     console.log('userNameState:', userNameState);
@@ -80,7 +81,7 @@ const AddInterview = () => {
         <>
             <h2>Add New Interview</h2>
             <Form
-                name="add-new-intervew"
+                name="add-new-interview"
                 labelCol={{ span: 4 }}
                 wrapperCol={{ span: 14 }}
                 layout="horizontal"
@@ -115,7 +116,7 @@ const AddInterview = () => {
                     <Input />
                 </Form.Item>
                 <Form.Item>
-                    <Button type="primary" htmlType="submit">Add</Button><Button>Cancel</Button>
+                    <Button type="primary" htmlType="submit">Add</Button><Button onClick={()=>props.history.push('/appointments')}>Cancel</Button>
                 </Form.Item>
             </Form>
         </>

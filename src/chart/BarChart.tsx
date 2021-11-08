@@ -5,13 +5,15 @@ import {passRate} from "../actions/bar.action";
 
 const BarChart = () => {
 
+    const userState = useSelector((state:any)=>state);
     const barChartState = useSelector((state:any)=>state.bar);
     console.log('barChartState', barChartState)
 
     const dispatch = useDispatch();
 
     useEffect(()=>{
-        dispatch(passRate());
+        if(userState?.user?.user?.user?.role?.role=='hr')
+            dispatch(passRate());
     },[dispatch])
 
     const [label, setLabel] = useState([])
